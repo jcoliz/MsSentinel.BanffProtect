@@ -1,8 +1,8 @@
 using Microsoft.Extensions.Caching.Distributed;
 
-namespace MsSentinel.BanffProtect.Tests.Unit.Fakes;
+namespace MsSentinel.BanffProtect.Application.Fakes;
 
-internal class FakeDistributedCache : IDistributedCache
+public class FakeDistributedCache : IDistributedCache
 {
     private readonly Dictionary<string, byte[]> _cache = new();
 

@@ -1,6 +1,6 @@
 using MsSentinel.BanffProtect.Application;
+using MsSentinel.BanffProtect.Application.Fakes;
 using MsSentinel.BanffProtect.Entities;
-using MsSentinel.BanffProtect.Tests.Unit.Fakes;
 
 public class ConfigurationFeatureTests
 {
