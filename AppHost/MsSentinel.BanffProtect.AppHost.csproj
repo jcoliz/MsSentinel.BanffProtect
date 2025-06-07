@@ -10,8 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MsSentinel.BanffProtect.ApiService\MsSentinel.BanffProtect.ApiService.csproj" />
-    <ProjectReference Include="..\MsSentinel.BanffProtect.Web\MsSentinel.BanffProtect.Web.csproj" />
+    <ProjectReference Include="..\BackEnd\MsSentinel.BanffProtect.ApiService.csproj" />
+    <ProjectReference Include="..\FrontEnd.Blazor\MsSentinel.BanffProtect.Web.csproj" />
   </ItemGroup>
 
   <ItemGroup>
