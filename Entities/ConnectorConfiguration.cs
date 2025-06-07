@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations;
+namespace MsSentinel.BanffProtect.Entities;
 
 /// <summary>
 /// Contains parameters needed for a connector configuration to Microsoft Sentinel
