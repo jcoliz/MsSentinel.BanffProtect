@@ -6,9 +6,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MsSentinel.BanffProtect.App
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MsSentinel.BanffProtect.ServiceDefaults", "ServiceDefaults\MsSentinel.BanffProtect.ServiceDefaults.csproj", "{82CAFC9B-E67A-4FD5-87A3-F724DC012C82}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MsSentinel.BanffProtect.ApiService", "BackEnd\MsSentinel.BanffProtect.ApiService.csproj", "{27AC9767-A006-49EF-9A5C-555486B4FA09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MsSentinel.BanffProtect.ApiService", "BackEnd\MsSentinel.BanffProtect.BackEnd.csproj", "{27AC9767-A006-49EF-9A5C-555486B4FA09}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MsSentinel.BanffProtect.Web", "FrontEnd.Blazor\MsSentinel.BanffProtect.Web.csproj", "{6B0DAC04-4192-41FC-9690-4AEE7F457AB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MsSentinel.BanffProtect.Web", "FrontEnd.Blazor\MsSentinel.BanffProtect.FrontEnd.Blazor.csproj", "{6B0DAC04-4192-41FC-9690-4AEE7F457AB6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
