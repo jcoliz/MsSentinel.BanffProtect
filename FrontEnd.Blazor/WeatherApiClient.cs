@@ -1,4 +1,4 @@
-namespace MsSentinel.BanffProtect.Web;
+namespace MsSentinel.BanffProtect.FrontEnd.Blazor;
 
 public class WeatherApiClient(HttpClient httpClient)
 {

@@ -1,4 +1,4 @@
-using MsSentinel.BanffProtect.Web;
+using MsSentinel.BanffProtect.FrontEnd.Blazor;
 using MsSentinel.BanffProtect.FrontEnd.Blazor.Components;
 
 var builder = WebApplication.CreateBuilder(args);
