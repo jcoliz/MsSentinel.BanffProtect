@@ -10,4 +10,8 @@
     <ProjectReference Include="..\ServiceDefaults\MsSentinel.BanffProtect.ServiceDefaults.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="NSwag.AspNetCore" Version="14.4.0" />
+  </ItemGroup>
+
 </Project>

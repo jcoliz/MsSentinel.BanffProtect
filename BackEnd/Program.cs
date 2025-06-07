@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Http.Json;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add service defaults & Aspire components.
@@ -6,10 +8,31 @@ builder.AddServiceDefaults();
 // Add services to the container.
 builder.Services.AddProblemDetails();
 
+// Add Swagger services
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddOpenApiDocument(options =>
+{
+    options.Title = "MsSentinel.BanffProtect.Backend";
+    options.Description = "Application boundary between .NET backend and frontend.";
+});
+
+// Tune the JSON formatting
+// https://www.meziantou.net/configuring-json-options-in-asp-net-core.htm
+builder.Services.Configure<JsonOptions>(options =>
+{
+    options.SerializerOptions.PropertyNameCaseInsensitive = false;
+    options.SerializerOptions.PropertyNamingPolicy = null;
+    options.SerializerOptions.WriteIndented = true;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseExceptionHandler();
+
+// Add swagger UI
+app.UseOpenApi();
+app.UseSwaggerUi();
 
 var summaries = new[]
 {
