@@ -11,7 +11,7 @@ internal class FakeDistributedCache : IDistributedCache
 
     public Task<byte[]?> GetAsync(string key, CancellationToken token = default)
     {
-        throw new NotImplementedException();
+        return Task.FromResult((byte[]?)default);
     }
 
     public void Refresh(string key)

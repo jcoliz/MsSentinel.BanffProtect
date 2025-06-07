@@ -16,4 +16,12 @@ public class ConfigurationFeatureTests
     {
         Assert.That(feature, Is.Not.Null);
     }
+
+    [Test]
+    public async Task NotExists()
+    {
+        var exists = await feature!.IfExistsAsync();
+
+        Assert.That(exists,Is.False);
+    }
 }
