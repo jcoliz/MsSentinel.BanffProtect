@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ServiceDefaults\MsSentinel.BanffProtect.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\Application\MsSentinel.BanffProtect.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

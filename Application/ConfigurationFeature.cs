@@ -1,5 +1,8 @@
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Logging;
 using MsSentinel.BanffProtect.Entities;
 
 namespace MsSentinel.BanffProtect.Application;
@@ -8,7 +11,7 @@ namespace MsSentinel.BanffProtect.Application;
 /// Provides persistent storage for a single connector configurations
 /// Backed by a distributed cache
 /// </summary>
-public class ConfigurationFeature(IDistributedCache distributedCache)
+public partial class ConfigurationFeature(IDistributedCache distributedCache)
 {
     /// <summary>
     /// Returns true if there is a configuration available to be read

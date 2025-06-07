@@ -1,4 +1,9 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Http.Json;
+using Microsoft.Extensions.Caching.Distributed;
+using MsSentinel.BanffProtect.Application;
+using MsSentinel.BanffProtect.Application.Fakes;
+using MsSentinel.BanffProtect.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +29,9 @@ builder.Services.Configure<JsonOptions>(options =>
     options.SerializerOptions.PropertyNamingPolicy = null;
     options.SerializerOptions.WriteIndented = true;
 });
+
+builder.Services.AddSingleton<IDistributedCache,FakeDistributedCache>();
+builder.Services.AddSingleton<ConfigurationFeature>();
 
 var app = builder.Build();
 
@@ -51,6 +59,16 @@ app.MapGet("/weatherforecast", () =>
         .ToArray();
     return forecast;
 });
+
+app.MapPut("/config", async (ConnectorConfiguration config, ConfigurationFeature feature) =>
+{
+    app.Logger.LogInformation("Received config: {config}", JsonSerializer.Serialize(config));
+
+    await feature.StoreAsync(config);
+    return Results.NoContent();
+})
+.WithName("StoreConfig")
+.Produces(204);
 
 app.MapDefaultEndpoints();
 
