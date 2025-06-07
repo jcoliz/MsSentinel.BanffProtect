@@ -12,6 +12,14 @@
 
   <ItemGroup>
     <PackageReference Include="NSwag.AspNetCore" Version="14.4.0" />
+		<PackageReference Include="NSwag.MSBuild" Version="14.4.0">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
   </ItemGroup>
+
+  <Target Name="NSwag" AfterTargets="PostBuildEvent">
+		<Exec WorkingDirectory="$(ProjectDir)" Command="$(NSwagExe_Net80) run $(ProjectDir)\nswag.json /variables:Configuration=$(Configuration)" />
+	</Target>
 
 </Project>
