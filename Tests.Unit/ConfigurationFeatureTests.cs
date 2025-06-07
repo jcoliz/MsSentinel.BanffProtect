@@ -1,4 +1,5 @@
 using MsSentinel.BanffProtect.Application;
+using MsSentinel.BanffProtect.Entities;
 using MsSentinel.BanffProtect.Tests.Unit.Fakes;
 
 public class ConfigurationFeatureTests
@@ -23,5 +24,16 @@ public class ConfigurationFeatureTests
         var exists = await feature!.IfExistsAsync();
 
         Assert.That(exists,Is.False);
+    }
+
+    [Test]
+    public async Task Exists()
+    {
+        var config = new ConnectorConfiguration();
+        await feature!.StoreAsync(config);
+
+        var exists = await feature!.IfExistsAsync();
+
+        Assert.That(exists,Is.True);
     }
 }

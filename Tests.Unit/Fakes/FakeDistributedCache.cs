@@ -4,6 +4,8 @@ namespace MsSentinel.BanffProtect.Tests.Unit.Fakes;
 
 internal class FakeDistributedCache : IDistributedCache
 {
+    private readonly Dictionary<string, byte[]> _cache = new();
+
     public byte[]? Get(string key)
     {
         throw new NotImplementedException();
@@ -11,7 +13,7 @@ internal class FakeDistributedCache : IDistributedCache
 
     public Task<byte[]?> GetAsync(string key, CancellationToken token = default)
     {
-        return Task.FromResult((byte[]?)default);
+        return Task.FromResult(_cache.GetValueOrDefault(key));
     }
 
     public void Refresh(string key)
@@ -41,6 +43,8 @@ internal class FakeDistributedCache : IDistributedCache
 
     public Task SetAsync(string key, byte[] value, DistributedCacheEntryOptions options, CancellationToken token = default)
     {
-        throw new NotImplementedException();
+        _cache[key] = value;
+
+        return Task.CompletedTask;
     }
 }
