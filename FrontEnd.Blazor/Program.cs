@@ -1,4 +1,4 @@
-using MsSentinel.BanffProtect.FrontEnd.Blazor;
+using MsSentinel.BanffProtect.BackEnd.Api;
 using MsSentinel.BanffProtect.FrontEnd.Blazor.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,11 +13,11 @@ builder.Services.AddRazorComponents(options =>
 
 builder.Services.AddOutputCache();
 
-builder.Services.AddHttpClient<WeatherApiClient>(client =>
+builder.Services.AddHttpClient<ApiClient>(client =>
     {
         // This URL uses "https+http://" to indicate HTTPS is preferred over HTTP.
         // Learn more about service discovery scheme resolution at https://aka.ms/dotnet/sdschemes.
-        client.BaseAddress = new("https+http://apiservice");
+        client.BaseAddress = new("https+http://backend");
     });
 
 var app = builder.Build();

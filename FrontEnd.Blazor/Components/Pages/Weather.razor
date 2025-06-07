@@ -2,7 +2,7 @@
 @attribute [StreamRendering(true)]
 @attribute [OutputCache(Duration = 5)]
 
-@inject WeatherApiClient WeatherApi
+@inject ApiClient BackEndApi
 
 <PageTitle>Weather</PageTitle>
 
@@ -29,7 +29,7 @@ else
             @foreach (var forecast in forecasts)
             {
                 <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
+                    <td>@forecast.Date.LocalDateTime.ToShortDateString()</td>
                     <td>@forecast.TemperatureC</td>
                     <td>@forecast.TemperatureF</td>
                     <td>@forecast.Summary</td>
@@ -40,10 +40,10 @@ else
 }
 
 @code {
-    private WeatherForecast[]? forecasts;
+    private ICollection<WeatherForecast>? forecasts;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await WeatherApi.GetWeatherAsync();
+        forecasts = await BackEndApi.GetWeatherforecastAsync();
     }
 }
