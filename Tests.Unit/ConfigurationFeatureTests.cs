@@ -36,4 +36,22 @@ public class ConfigurationFeatureTests
 
         Assert.That(exists,Is.True);
     }
+
+    [Test]
+    public async Task LoadAndSave()
+    {
+        var expected = new ConnectorConfiguration()
+        {
+            TenantId = Guid.NewGuid(),
+            ApplicationID = Guid.NewGuid(),
+            ApplicationSecret = "Secret",
+            CollectionEndpoint = new Uri("https://azurecontainerapps.io/"),
+            RuleId = "RuleId"
+        };
+        await feature!.StoreAsync(expected);
+
+        var actual = await feature!.LoadAsync();
+
+        Assert.That(actual,Is.EqualTo(expected));
+    }
 }
