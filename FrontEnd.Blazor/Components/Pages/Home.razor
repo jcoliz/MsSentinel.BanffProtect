@@ -33,6 +33,13 @@
     <div class="col-md-7 col-lg-8">
         <hr class="mb-4">
         <h4 class="mb-3">Microsoft Sentinel</h4>
+        @if (Error is not null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @Error
+                <button type="button" class="btn-close" aria-label="Close" @onclick="() => {Error = null;}"/>
+            </div>
+        }
         <form class="needs-validation" novalidate="" @onsubmit="StoreConfig">
             <div class="row g-3">
                 <div class="col-12"> <label for="tenantid" class="form-label">Tenant ID</label>
