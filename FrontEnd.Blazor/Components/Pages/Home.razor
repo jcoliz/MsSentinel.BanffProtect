@@ -46,34 +46,42 @@
                     </div>
                 </div>
                 <div class="col-12"> <label for="appid" class="form-label">App ID</label>
-                    <div class="input-group has-validation"> <span class="input-group-text">ID</span> <input type="text"
-                            class="form-control" id="appid" placeholder="App ID" required="">
+                    <div class="input-group has-validation"> <span class="input-group-text">ID</span> <InputText
+                            class="form-control" id="appid" placeholder="App ID"
+                            @bind-Value="Model.ApplicationId"
+                            />
                         <div class="invalid-feedback">
                             Application ID is required.
                         </div>
                     </div>
                 </div>
                 <div class="col-12"> <label for="appsecret" class="form-label">App secret</label>
-                    <div class="input-group has-validation"> <span class="input-group-text">***</span> <input type="password"
-                            class="form-control" id="appsecret" placeholder="Secret" required="">
+                    <div class="input-group has-validation"> <span class="input-group-text">***</span> <InputText type="password"
+                            class="form-control" id="appsecret" placeholder="Secret"
+                            @bind-Value="Model.ApplicationSecret"
+                            />
                         <div class="invalid-feedback">
                             Application secret is required.
                         </div>
                     </div>
                 </div>
                 <div class="col-12"> <label for="dce" class="form-label">Data collection endpoint</label>
-                    <div class="input-group has-validation"> <span class="input-group-text">URL</span> <input type="url"
-                            class="form-control" id="dce" placeholder="https://" required="">
+                    <div class="input-group has-validation"> <span class="input-group-text">URL</span> <InputText type="url"
+                            class="form-control" id="dce" placeholder="https://"
+                            @bind-Value="Model.CollectionEndpoint"
+                            />
                         <div class="invalid-feedback">
                             Endpoint URL is required.
                         </div>
                     </div>
                 </div>
                 <div class="col-12"> <label for="immutable" class="form-label">Data collection rule immutable ID</label>
-                    <div class="input-group has-validation"> <span class="input-group-text">ID</span> <input type="text"
-                            class="form-control" id="immutable" placeholder="" required="">
+                    <div class="input-group has-validation"> <span class="input-group-text">ID</span> <InputText
+                            class="form-control" id="immutable" placeholder=""
+                            @bind-Value="Model.RuleId"
+                            />
                         <div class="invalid-feedback">
-                            Endpoint URL is required.
+                            Rule ID is required.
                         </div>
                     </div>
                 </div>
@@ -227,19 +235,24 @@
 </div>
 
 @code {
-
+//97bc9d95-3248-4943-85c5-d45fdd2053f1
     internal class ConnectorConfigurationValues
     {
         public string? TenantId { get; set; }
+        public string? ApplicationId { get; set; }
+        public string? ApplicationSecret { get; set; }
+        public string? RuleId { get; set; }
+        public string? CollectionEndpoint { get; set; }
 
         public ConnectorConfiguration GetOutput()
         {
             return new ConnectorConfiguration()
             {
-                TenantId = Guid.Parse(TenantId!),
-                ApplicationSecret = "Blazor.ApplicationSecret",
-                RuleId = "Blazor.RuleId",
-                CollectionEndpoint = new Uri("https://azure.io/")
+                TenantId = Guid.Parse(TenantId ?? throw new Exception("Tenant ID is required")),
+                ApplicationID = Guid.Parse(ApplicationId ?? throw new Exception("Application ID is required")),
+                ApplicationSecret = ApplicationSecret ?? throw new Exception("Application secret is required"),
+                RuleId = RuleId ?? throw new Exception("Rule ID is required"),
+                CollectionEndpoint = new Uri(CollectionEndpoint ?? throw new Exception("Collection endpoint is required"))
             };
         }
     };
@@ -247,10 +260,19 @@
     [SupplyParameterFromForm]
     private ConnectorConfigurationValues? Model { get; set; }
 
+    private string? Error { get; set; }
+
     protected override void OnInitialized() => Model ??= new();
 
     private async Task StoreConfig()
     {
-        await BackEndApi.StoreConfigAsync(Model!.GetOutput());
+        try
+        {
+            await BackEndApi.StoreConfigAsync(Model!.GetOutput());
+        }
+        catch (Exception ex)
+        {
+            Error = ex.Message;
+        }
     }
 }
