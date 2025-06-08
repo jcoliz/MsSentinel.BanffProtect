@@ -1,0 +1,180 @@
+openapi: 3.1.0
+info:
+  title: 'Shape of Logs'
+  version: 0.0.1
+components:
+  schemas:
+    Custom-jamfprotecttelemetryv2:
+      type: object
+      additionalProperties: false
+      description: ASIM - Generic Fields
+      properties:
+        action:
+          description: 
+          type: dynamic
+        action_type:
+          description: 
+          type: int
+        deadline:
+          description: 
+          type: int
+        event:
+          description: 
+          type: dynamic
+        event_type:
+          description: 
+          type: int
+        glob_seq_num:
+          description: 
+          type: int
+        host:
+          description: 
+          type: dynamic
+        mach_time:
+          description: 
+          type: long
+        metadata:
+          description: 
+          type: dynamic
+        process:
+          description: 
+          type: dynamic
+        seq_num:
+          description: 
+          type: int
+        thread:
+          description: 
+          type: dynamic
+        time:
+          description: 
+          type: string
+          format: date-time
+        uuid:
+          description: 
+          type: string
+        version:
+          description: 
+          type: int
+    Custom-jamfprotectunifiedlogs:
+      type: object
+      additionalProperties: false
+      description: ASIM - Generic Fields
+      properties:
+        TimeGenerated:
+          description: 
+          type: string
+          format: date-time
+        caid:
+          description: 
+          type: string
+        certid:
+          description: 
+          type: string
+        input:
+          description: 
+          type: dynamic
+    Custom-jamfprotecttelemetryv1:
+      type: object
+      additionalProperties: false
+      description: ASIM - Common Fields
+      properties:
+        TimeGenerated:
+          description: 
+          type: string
+          format: date-time
+        arguments:
+          description: 
+          type: dynamic
+        exec_chain:
+          description: 
+          type: dynamic
+        header:
+          description: 
+          type: dynamic
+        host_info:
+          description: 
+          type: dynamic
+        key:
+          description: 
+          type: string
+        return:
+          description: 
+          type: dynamic
+        subject:
+          description: 
+          type: dynamic
+        identity:
+          description: 
+          type: dynamic
+        texts:
+          description: 
+          type: string
+        metrics:
+          description: 
+          type: dynamic
+        page_info:
+          description: 
+          type: dynamic
+        attributes:
+          description: 
+          type: dynamic
+        exec_chain_child:
+          description: 
+          type: dynamic
+        path:
+          description: 
+          type: dynamic
+        _event_score:
+          description: 
+          type: int
+        contents:
+          description: 
+          type: string
+        file:
+          description: 
+          type: dynamic
+        socket_inet:
+          description: 
+          type: dynamic
+        exit:
+          description: 
+          type: dynamic
+        exec_args:
+          description: 
+          type: dynamic
+        exec_env:
+          description: 
+          type: dynamic
+        exec_chain_parent:
+          description: 
+          type: dynamic
+        architecture:
+          description: 
+          type: string
+        bios_firmware_versions:
+          description: 
+          type: dynamic
+        process:
+          description: 
+          type: dynamic
+        rateLimitingSeconds:
+          description: 
+          type: int
+    Custom-jamfprotectalerts:
+      type: object
+      additionalProperties: false
+      description: ASIM - Generic Fields
+      properties:
+        TimeGenerated:
+          description: 
+          type: string
+          format: date-time
+        caid:
+          description: 
+          type: string
+        certid:
+          description: 
+          type: string
+        input:
+          description: 
+          type: dynamic

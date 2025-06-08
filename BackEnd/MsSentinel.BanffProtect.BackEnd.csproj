@@ -4,6 +4,9 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <LogsShapeConfigFile>Shape\nswag.json</LogsShapeConfigFile>
+    <LogsShapeInputFile>Shape\openapi.yaml</LogsShapeInputFile>
+    <LogsShapeOutputFile>$(BaseIntermediateOutputPath)\LogsShape.cs</LogsShapeOutputFile>    
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,6 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Identity" Version="1.14.0" />
+    <PackageReference Include="Azure.Monitor.Ingestion" Version="1.1.2" />
     <PackageReference Include="NSwag.AspNetCore" Version="14.4.0" />
 		<PackageReference Include="NSwag.MSBuild" Version="14.4.0">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -22,5 +27,20 @@
   <Target Name="NSwag" AfterTargets="PostBuildEvent">
 		<Exec WorkingDirectory="$(ProjectDir)" Command="$(NSwagExe_Net80) run $(ProjectDir)\nswag.json /variables:Configuration=$(Configuration)" />
 	</Target>
+
+  <!--Custom task to generate logs shape source code from OpenApi Specification before compilation-->
+  <Target Name="GenerateSources" BeforeTargets="BeforeBuild" Inputs="$(ApiClientConfigFile);$(LogsShapeInputFile)" Outputs="$(LogsShapeOutputFile)">
+    <Exec Command="$(NSwagExe_Net80) run $(LogsShapeConfigFile) /variables:OutputFile=../$(LogsShapeOutputFile)" ConsoleToMSBuild="true" />
+  </Target>
+  
+  <!--Custom task to remove generated source code before clean project-->
+  <Target Name="RemoveGenerateSources" BeforeTargets="CoreClean">
+      <RemoveDir Directories="$(LogsShapeOutputFile)" />
+  </Target>
+
+  <!--Register generated source code as project source code-->
+  <ItemGroup>
+    <Compile Include="$(LogsShapeOutputFile)" />
+  </ItemGroup>
 
 </Project>

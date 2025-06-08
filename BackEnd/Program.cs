@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http.Json;
 using Microsoft.Extensions.Caching.Distributed;
 using MsSentinel.BanffProtect.Application;
 using MsSentinel.BanffProtect.Application.Fakes;
+using MsSentinel.BanffProtect.Backend.Logs;
 using MsSentinel.BanffProtect.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +33,7 @@ builder.Services.Configure<JsonOptions>(options =>
 
 builder.Services.AddSingleton<IDistributedCache,FakeDistributedCache>();
 builder.Services.AddSingleton<ConfigurationFeature>();
+builder.Services.AddHostedService<SendLogsWorker>();
 
 var app = builder.Build();
 
