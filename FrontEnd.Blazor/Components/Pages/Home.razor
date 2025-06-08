@@ -1,4 +1,6 @@
 ﻿@page "/"
+@rendermode InteractiveServer
+@inject ApiClient BackEndApi
 
 <PageTitle>Admin Console</PageTitle>
 
@@ -73,7 +75,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="w-100 btn btn-primary btn-lg mt-3" type="submit">Connect</button>
+                <button class="w-100 btn btn-primary btn-lg mt-3" @onclick="StoreConfig" type="button">Connect</button>
             </div>
         </form>
     </div>
@@ -221,3 +223,17 @@
         </tbody>
     </table>
 </div>
+
+@code {
+    private async Task StoreConfig()
+    {
+        await BackEndApi.StoreConfigAsync(new ConnectorConfiguration()
+        {
+            TenantId = Guid.NewGuid(),
+            ApplicationID = Guid.NewGuid(),
+            ApplicationSecret = "Blazor.ApplicationSecret",
+            CollectionEndpoint = new Uri("http://dce.azuire.io/"),
+            RuleId = "Blazor.RuleId"
+        });
+    }
+}
