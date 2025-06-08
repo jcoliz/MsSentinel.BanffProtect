@@ -33,11 +33,13 @@
     <div class="col-md-7 col-lg-8">
         <hr class="mb-4">
         <h4 class="mb-3">Microsoft Sentinel</h4>
-        <form class="needs-validation" novalidate="">
+        <form class="needs-validation" novalidate="" @onsubmit="StoreConfig">
             <div class="row g-3">
                 <div class="col-12"> <label for="tenantid" class="form-label">Tenant ID</label>
-                    <div class="input-group has-validation"> <span class="input-group-text">ID</span> <input type="text"
-                            class="form-control" id="tenantid" placeholder="Tenant ID" required="">
+                    <div class="input-group has-validation"> <span class="input-group-text">ID</span> <InputText
+                            class="form-control" id="tenantid" placeholder="Tenant ID"
+                            @bind-Value="Model.TenantId"
+                            />
                         <div class="invalid-feedback">
                             Tenant ID is required.
                         </div>
@@ -75,7 +77,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="w-100 btn btn-primary btn-lg mt-3" @onclick="StoreConfig" type="button">Connect</button>
+                <button class="w-100 btn btn-primary btn-lg mt-3" type="submit">Connect</button>
             </div>
         </form>
     </div>
@@ -225,15 +227,30 @@
 </div>
 
 @code {
+
+    internal class ConnectorConfigurationValues
+    {
+        public string? TenantId { get; set; }
+
+        public ConnectorConfiguration GetOutput()
+        {
+            return new ConnectorConfiguration()
+            {
+                TenantId = Guid.Parse(TenantId!),
+                ApplicationSecret = "Blazor.ApplicationSecret",
+                RuleId = "Blazor.RuleId",
+                CollectionEndpoint = new Uri("https://azure.io/")
+            };
+        }
+    };
+
+    [SupplyParameterFromForm]
+    private ConnectorConfigurationValues? Model { get; set; }
+
+    protected override void OnInitialized() => Model ??= new();
+
     private async Task StoreConfig()
     {
-        await BackEndApi.StoreConfigAsync(new ConnectorConfiguration()
-        {
-            TenantId = Guid.NewGuid(),
-            ApplicationID = Guid.NewGuid(),
-            ApplicationSecret = "Blazor.ApplicationSecret",
-            CollectionEndpoint = new Uri("http://dce.azuire.io/"),
-            RuleId = "Blazor.RuleId"
-        });
+        await BackEndApi.StoreConfigAsync(Model!.GetOutput());
     }
 }
