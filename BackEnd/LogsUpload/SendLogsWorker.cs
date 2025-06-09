@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Runtime.CompilerServices;
 using Azure.Identity;
 using Azure.Monitor.Ingestion;
@@ -6,7 +5,7 @@ using MsSentinel.BanffProtect.Application;
 using MsSentinel.BanffProtect.Backend.Logs.Shape;
 using MsSentinel.BanffProtect.Backend.Metrics;
 
-namespace MsSentinel.BanffProtect.Backend.Logs;
+namespace MsSentinel.BanffProtect.Backend.LogsUpload;
 
 public partial class SendLogsWorker(
     ConfigurationFeature configFeature,

@@ -58,7 +58,7 @@
       "wrapResponseMethods": [],
       "generateResponseClasses": true,
       "responseClass": "SwaggerResponse",
-      "namespace": "MsSentinel.BanffProtect.Backend.Logs.Shape",
+      "namespace": "MsSentinel.BanffProtect.Backend.LogsUpload",
       "requiredPropertiesMustBeDefined": true,
       "dateType": "System.DateTimeOffset",
       "jsonConverters": null,

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http.Json;
 using Microsoft.Extensions.Caching.Distributed;
 using MsSentinel.BanffProtect.Application;
 using MsSentinel.BanffProtect.Application.Fakes;
-using MsSentinel.BanffProtect.Backend.Logs;
+using MsSentinel.BanffProtect.Backend.LogsUpload;
 using MsSentinel.BanffProtect.Backend.Metrics;
 using MsSentinel.BanffProtect.Entities;
 
