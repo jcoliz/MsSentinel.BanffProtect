@@ -6,9 +6,29 @@
 @inject IOptions<IdentityOptions> identityOptions
 @inject IOptions<LogIngestionOptions> logOptions
 
-<PageTitle>Admin Console</PageTitle>
+<PageTitle>Integrations</PageTitle>
 
-<h1 class="mt-3">Admin Console</h1>
+<h1 class="mt-3">Integrations</h1>
+
+<div class="toast-container position-fixed top-0 end-0 p-3">
+    @if (IsShowingToast)
+    {
+        <div id="liveToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+            <svg
+                class="bi" aria-hidden="true">
+                <use xlink:href="#puzzle"></use>
+            </svg>                
+            <strong class="ms-2 me-auto">Banff Protect</strong>
+            <small>now</small>
+            <button type="button" class="btn-close" @onclick="() => {IsShowingToast = false;}"  aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+            Connected to Microsoft Sentinel! 
+            </div>
+        </div>
+    }
+</div>
 
 <div class="row g-5">
     <div class="col-md-5 col-lg-4 order-md-last">
@@ -142,6 +162,8 @@
 
     private bool IsShowingSentinel { get; set; } = false;
 
+    private bool IsShowingToast { get; set; } = false;
+
     protected override void OnInitialized()
     {
         if (Model is null)
@@ -182,6 +204,8 @@
         try
         {
             await BackEndApi.StoreConfigAsync(Model!.GetOutput());
+
+            IsShowingToast = true;
         }
         catch (Exception ex)
         {
