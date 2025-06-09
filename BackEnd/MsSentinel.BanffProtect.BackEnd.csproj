@@ -4,8 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <LogsShapeConfigFile>Shape\nswag.json</LogsShapeConfigFile>
-    <LogsShapeInputFile>Shape\openapi.yaml</LogsShapeInputFile>
+    <LogsShapeConfigFile>LogsUpload\nswag.json</LogsShapeConfigFile>
+    <LogsShapeInputFile>LogsUpload\openapi.yaml</LogsShapeInputFile>
     <LogsShapeOutputFile>$(BaseIntermediateOutputPath)\LogsShape.cs</LogsShapeOutputFile>    
   </PropertyGroup>
 
