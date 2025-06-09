@@ -1,9 +1,11 @@
 using MsSentinel.BanffProtect.BackEnd.Api;
 using MsSentinel.BanffProtect.FrontEnd.Blazor.Components;
+using MsSentinel.BanffProtect.FrontEnd.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddTomlFile("config.toml", optional: true, reloadOnChange: true);
+
 
 // Add service defaults & Aspire components.
 builder.AddServiceDefaults();
@@ -21,6 +23,14 @@ builder.Services.AddHttpClient<ApiClient>(client =>
         // Learn more about service discovery scheme resolution at https://aka.ms/dotnet/sdschemes.
         client.BaseAddress = new("https+http://backend");
     });
+
+// Load options from configuration. These all us to provide defaults for testing
+builder.Services.Configure<LogIngestionOptions>(
+    builder.Configuration.GetSection(LogIngestionOptions.Section)
+);
+builder.Services.Configure<IdentityOptions>(
+    builder.Configuration.GetSection(IdentityOptions.Section)
+);
 
 var app = builder.Build();
 
