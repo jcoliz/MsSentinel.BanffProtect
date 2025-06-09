@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <Target Name="NSwag" AfterTargets="PostBuildEvent">
-		<Exec WorkingDirectory="$(ProjectDir)" Command="$(NSwagExe_Net80) run $(ProjectDir)\nswag.json /variables:Configuration=$(Configuration)" />
+		<Exec WorkingDirectory="$(ProjectDir)" Command="$(NSwagExe_Net80) run $(ProjectDir)\ApiClient\nswag.json /variables:Configuration=$(Configuration)" />
 	</Target>
 
   <!--Custom task to generate logs shape source code from OpenApi Specification before compilation-->

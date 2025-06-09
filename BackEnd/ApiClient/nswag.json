@@ -3,7 +3,7 @@
   "defaultVariables": null,
   "documentGenerator": {
     "aspNetCoreToOpenApi": {
-      "project": "MsSentinel.BanffProtect.BackEnd.csproj",
+      "project": "../MsSentinel.BanffProtect.BackEnd.csproj",
       "documentName": "v1",
       "msBuildProjectExtensionsPath": null,
       "configuration": null,
@@ -164,7 +164,7 @@
       "templateDirectory": null,
       "serviceHost": null,
       "serviceSchemes": null,
-      "output": "../FrontEnd.Blazor/ApiClient.cs",
+      "output": "../../FrontEnd.Blazor/ApiClient.cs",
       "newLineBehavior": "Auto"
     }
   }
