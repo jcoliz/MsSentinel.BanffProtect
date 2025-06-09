@@ -66,7 +66,7 @@ app.MapGet("/weatherforecast", () =>
 
 app.MapPut("/config", async (ConnectorConfiguration config, ConfigurationFeature feature) =>
 {
-    app.Logger.LogInformation("Received config: {config}", JsonSerializer.Serialize(config));
+    app.Logger.LogInformation("Received config: {Config}", JsonSerializer.Serialize(config with { ApplicationSecret = "***" }));
 
     await feature.StoreAsync(config);
     return Results.NoContent();
