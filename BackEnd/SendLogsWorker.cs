@@ -1,21 +1,24 @@
+using System.Collections;
 using System.Runtime.CompilerServices;
 using Azure.Identity;
 using Azure.Monitor.Ingestion;
 using MsSentinel.BanffProtect.Application;
 using MsSentinel.BanffProtect.Backend.Logs.Shape;
+using MsSentinel.BanffProtect.Backend.Metrics;
 
 namespace MsSentinel.BanffProtect.Backend.Logs;
 
 public partial class SendLogsWorker(
     ConfigurationFeature configFeature,
-    ILogger<SendLogsWorker> logger
+    ILogger<SendLogsWorker> logger,
+    BackEndMetrics metrics
 ) : BackgroundService
 {
     private LogsIngestionClient? logsClient;
 
     private string? ruleId;
 
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    protected async override Task ExecuteAsync(CancellationToken stoppingToken)
     {
         try
         {
@@ -26,10 +29,10 @@ public partial class SendLogsWorker(
                     if (await CheckLogsClientAsync())
                     {
                         var telemetry = GenerateTelemetryV2();
-                        await UploadToLogsAsync("Custom-jamfprotecttelemetryv2",telemetry,stoppingToken);
+                        await UploadToLogsAsync("Custom-jamfprotecttelemetryv2", telemetry, stoppingToken);
 
                         var logs = GenerateLogs();
-                        await UploadToLogsAsync("Custom-jamfprotectunifiedlogs",logs,stoppingToken);
+                        await UploadToLogsAsync("Custom-jamfprotectunifiedlogs",logs!,stoppingToken);
 
                         var alerts = GenerateAlerts();
                         await UploadToLogsAsync("Custom-jamfprotectalerts",alerts,stoppingToken);
@@ -137,7 +140,7 @@ public partial class SendLogsWorker(
     }
 
 
-    public async Task UploadToLogsAsync(string streamName, IEnumerable<object> dataPoints, CancellationToken stoppingToken)
+    public async Task UploadToLogsAsync<T>(string streamName, ICollection<T> dataPoints, CancellationToken stoppingToken)
     {
         try
         {
@@ -149,6 +152,9 @@ public partial class SendLogsWorker(
                 cancellationToken: stoppingToken
             )
             .ConfigureAwait(false);
+
+            metrics.LogsSent(1, streamName);
+            metrics.LogLinesSent(dataPoints.Count, streamName);
 
             switch (response?.IsError)
             {
