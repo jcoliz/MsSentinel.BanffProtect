@@ -29,7 +29,7 @@
 	</Target>
 
   <!--Custom task to generate logs shape source code from OpenApi Specification before compilation-->
-  <Target Name="GenerateSources" BeforeTargets="BeforeBuild" Inputs="$(ApiClientConfigFile);$(LogsShapeInputFile)" Outputs="$(LogsShapeOutputFile)">
+  <Target Name="GenerateSources" BeforeTargets="BeforeBuild" Inputs="$(LogsShapeConfigFile);$(LogsShapeInputFile)" Outputs="$(LogsShapeOutputFile)">
     <Exec Command="$(NSwagExe_Net80) run $(LogsShapeConfigFile) /variables:OutputFile=../$(LogsShapeOutputFile)" ConsoleToMSBuild="true" />
   </Target>
   
