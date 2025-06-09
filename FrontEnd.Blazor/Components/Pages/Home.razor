@@ -125,7 +125,14 @@
                         </div>
                     </div>
                 </div>
-                <button class="w-100 btn btn-primary btn-lg mt-3" type="submit">Connect</button>
+                @if (IsConnected)
+                {
+                    <button class="w-100 btn btn-primary btn-lg mt-3 disabled">Connect</button>
+                }
+                else
+                {
+                    <button class="w-100 btn btn-primary btn-lg mt-3" type="submit">Connect</button>
+                }
             </div>
         </form>
         }
@@ -163,6 +170,8 @@
     private bool IsShowingSentinel { get; set; } = false;
 
     private bool IsShowingToast { get; set; } = false;
+
+    private bool IsConnected { get; set; } = false;
 
     protected override void OnInitialized()
     {
@@ -205,6 +214,7 @@
         {
             await BackEndApi.StoreConfigAsync(Model!.GetOutput());
 
+            IsConnected = true;
             IsShowingToast = true;
         }
         catch (Exception ex)
