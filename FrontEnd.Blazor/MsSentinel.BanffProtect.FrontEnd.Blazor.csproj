@@ -10,4 +10,12 @@
     <ProjectReference Include="..\ServiceDefaults\MsSentinel.BanffProtect.ServiceDefaults.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Alexinea.Extensions.Configuration.Toml" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="config.toml" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

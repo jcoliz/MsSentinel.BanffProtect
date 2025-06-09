@@ -3,6 +3,8 @@ using MsSentinel.BanffProtect.FrontEnd.Blazor.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddTomlFile("config.toml", optional: true, reloadOnChange: true);
+
 // Add service defaults & Aspire components.
 builder.AddServiceDefaults();
 
