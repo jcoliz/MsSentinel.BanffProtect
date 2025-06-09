@@ -1,6 +1,10 @@
 ﻿@page "/"
+@using Microsoft.Extensions.Options
+@using MsSentinel.BanffProtect.FrontEnd.Options
 @rendermode InteractiveServer
 @inject ApiClient BackEndApi
+@inject IOptions<IdentityOptions> identityOptions
+@inject IOptions<LogIngestionOptions> logOptions
 
 <PageTitle>Admin Console</PageTitle>
 
@@ -126,7 +130,40 @@
 
     private string? Error { get; set; }
 
-    protected override void OnInitialized() => Model ??= new();
+    protected override void OnInitialized()
+    {
+        if (Model is null)
+        {
+            Model = new();
+
+            // Pull default values out of config
+            if (identityOptions.Value.AppId != Guid.Empty)
+            {
+                Model.ApplicationId = identityOptions.Value.AppId.ToString();
+            }
+
+            if (identityOptions.Value.TenantId != Guid.Empty)
+            {
+                Model.TenantId = identityOptions.Value.TenantId.ToString();
+            }
+
+            if (!string.IsNullOrWhiteSpace(identityOptions.Value.AppSecret))
+            {
+                Model.ApplicationSecret = identityOptions.Value.AppSecret;
+            }
+
+            if (logOptions.Value.EndpointUri?.IsAbsoluteUri == true)
+            {
+                Model.CollectionEndpoint = logOptions.Value.EndpointUri.ToString();
+
+            }
+
+            if (!string.IsNullOrWhiteSpace(logOptions.Value.DcrImmutableId))
+            {
+                Model.RuleId = logOptions.Value.DcrImmutableId;
+            }
+        }
+    }
 
     private async Task StoreConfig()
     {
