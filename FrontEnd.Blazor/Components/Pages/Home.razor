@@ -36,7 +36,13 @@
     </div>
     <div class="col-md-7 col-lg-8">
         <hr class="mb-4">
-        <h4 class="mb-3">Microsoft Sentinel</h4>
+        <h4>Microsoft Sentinel</h4>
+
+        <div class="form-check form-switch mb-3">
+            <InputCheckbox class="form-check-input" role="switch" @bind-Value="IsShowingSentinel"/>
+            <label class="form-check-label" for="switchCheckDefault">Send logs to Microsoft Sentinel</label>
+        </div>
+
         @if (Error is not null)
         {
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -44,6 +50,9 @@
                 <button type="button" class="btn-close" aria-label="Close" @onclick="() => {Error = null;}"/>
             </div>
         }
+
+        @if (IsShowingSentinel)
+        {
         <form class="needs-validation" novalidate="" @onsubmit="StoreConfig">
             <div class="row g-3">
                 <div class="col-12"> <label for="tenantid" class="form-label">Tenant ID</label>
@@ -99,6 +108,7 @@
                 <button class="w-100 btn btn-primary btn-lg mt-3" type="submit">Connect</button>
             </div>
         </form>
+        }
     </div>
 </div>
 
@@ -129,6 +139,8 @@
     private ConnectorConfigurationValues? Model { get; set; }
 
     private string? Error { get; set; }
+
+    private bool IsShowingSentinel { get; set; } = false;
 
     protected override void OnInitialized()
     {
