@@ -7,9 +7,9 @@ using MsSentinel.BanffProtect.Backend.Metrics;
 
 namespace MsSentinel.BanffProtect.Backend.LogsUpload;
 
-public partial class SendLogsWorker(
+public partial class LogsUploadWorker(
     ConfigurationFeature configFeature,
-    ILogger<SendLogsWorker> logger,
+    ILogger<LogsUploadWorker> logger,
     BackEndMetrics metrics
 ) : BackgroundService
 {

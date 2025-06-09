@@ -35,7 +35,7 @@ builder.Services.Configure<JsonOptions>(options =>
 builder.Services.AddSingleton<BackEndMetrics>();
 builder.Services.AddSingleton<IDistributedCache,FakeDistributedCache>();
 builder.Services.AddSingleton<ConfigurationFeature>();
-builder.Services.AddHostedService<SendLogsWorker>();
+builder.Services.AddHostedService<LogsUploadWorker>();
 
 var app = builder.Build();
 
