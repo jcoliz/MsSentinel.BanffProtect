@@ -33,25 +33,57 @@
 <div class="row g-5">
     <div class="col-md-5 col-lg-4 order-md-last">
         <h4 class="d-flex justify-content-between align-items-center mb-3"> <span class="text-primary">Connection status</span>
-            <span class="badge bg-danger rounded-pill">NO</span> </h4>
+            @if (IsConnected)
+            {
+                <span class="badge bg-success rounded-pill">OK</span>
+            }
+            else
+            {
+                <span class="badge bg-danger rounded-pill">NO</span>
+            }
+        </h4>
         <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between lh-sm">
                 <div>
                     <h6 class="my-0">Connection settings</h6> <small class="text-body-secondary">Have connection settings been set?</small>
-                </div> <span class="text-body-secondary">NO</span>
+                </div> 
+                @if (IsConnected)
+                {
+                    <span class="text-body-secondary">YES</span>
+                }
+                else
+                {
+                    <span class="text-body-secondary">NO</span>
+                }
             </li>
             <li class="list-group-item d-flex justify-content-between lh-sm">
                 <div>
                     <h6 class="my-0">Sender status</h6> <small class="text-body-secondary">Status of log sending worker</small>
-                </div> <span class="text-body-secondary">...</span>
+                </div>
+                @if (IsConnected)
+                {
+                    <span class="text-body-secondary">OK</span>
+                }
+                else
+                {
+                    <span class="text-body-secondary">...</span>
+                }
             </li>
             <li class="list-group-item d-flex justify-content-between lh-sm">
                 <div>
                     <h6 class="my-0">Response status</h6> <small class="text-body-secondary">Last HTTP response from service</small>
-                </div> <span class="text-body-secondary">N/A</span>
+                </div>
+                @if (IsConnected)
+                {
+                    <span class="text-body-secondary">204</span>
+                }
+                else
+                {
+                    <span class="text-body-secondary">N/A</span>
+                }
             </li>
-            <li class="list-group-item d-flex justify-content-between"> <span># Logs sent</span> <strong>0</strong>
-            </li>
+            <!-- li class="list-group-item d-flex justify-content-between"> <span># Logs sent</span> <strong>0</strong>
+            </ li -->
         </ul>
         <div class="btn-toolbar mb-2 d-flex justify-content-end">
             <button type="button" @onclick="LoadDefaults"
