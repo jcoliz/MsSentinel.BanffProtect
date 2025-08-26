@@ -1,6 +1,6 @@
 # Tech Check Guide
 
-Follow this guide to ensure you have everything set up ready to start the Hands-on-Lab.
+Follow this guide to ensure you have everything set up ready to start setting up the demo.
 
 ## Azure account
 
@@ -66,4 +66,4 @@ This should execute without error, and return a version number starting with '8.
 
 ## Onward!
 
-Congratulations! You've met all the prerequisities, and now you're ready to set up the lab. Continue here: [Lab Setup](../README.md#setup)
+Congratulations! You've met all the prerequisities, and now you're ready to set up the demo. Continue here: [Lab Setup](../README.md#setup)
