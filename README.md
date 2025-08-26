@@ -99,7 +99,7 @@ Connect the CCP Push data connector contained within this solution.
 1. Click "Data connectors" on the left navigation pane, located under "Configuration"
 1. Select the "Jamf Protect" data connector. If it's not shown, refresh the results
 1. In the right details pane, click "Open connector page"
-1. Press "Connect"
+1. Press "Deploy connector resources"
 1. Keep this page open! We will never again be able to access the client secret available here.
 
 ## Build & run the Banff Protect project
@@ -110,7 +110,7 @@ Connect the CCP Push data connector contained within this solution.
 this application locally on our machine using .NET Aspire.
 
 1. Launch VS Code
-2. Choose "File" in the menu bar, and then "Open Folder..."
+1. Choose "File" in the menu bar, and then "Open Folder..."
 1. Open the folder where you had previously cloned the repository
 1. Press [F5]. This will build, run, and open a browser tab showing the Aspire Dashboard for the project.
 
@@ -137,7 +137,7 @@ sending logs to Sentinel.
 1. Click the slider next to "Send logs to Microsoft Sentinel". Now a form is displayed accepting configuration values.
 1. Copy the values from the connector tab into this tab
 1. Press the "Connect"
-1. Notice that a toast display confirming that we're connected, and that the connection status page is updated to show successful connection.
+1. Notice that a toast displays confirming that we're connected, and that the connection status page is updated to show successful connection.
 
 ## Check application logs locally
 
@@ -169,7 +169,7 @@ From here, you can see log ingestion requests coming into the DCR.
 
 ![screen-connector-connected](./docs/images/screen-connector-connected.jpeg)
 
-The data connector page displays helpful liveness quereies to validate that data is flowing.
+The data connector page displays helpful liveness queries to validate that data is flowing.
 
 1. Begin in the overview page for our Sentinel workspace.
 1. Click "Data connectors" on the left navigation pane, located under "Configuration"
