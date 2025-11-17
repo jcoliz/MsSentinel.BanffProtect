@@ -25,12 +25,12 @@
   </ItemGroup>
 
   <Target Name="NSwag" AfterTargets="PostBuildEvent">
-		<Exec WorkingDirectory="$(ProjectDir)" Command="$(NSwagExe_Net80) run $(ProjectDir)/ApiClient/nswag.json /variables:Configuration=$(Configuration)" />
+		<Exec WorkingDirectory="$(ProjectDir)" Command="$(NSwagExe_Net100) run $(ProjectDir)/ApiClient/nswag.json /variables:Configuration=$(Configuration)" />
 	</Target>
 
   <!--Custom task to generate logs shape source code from OpenApi Specification before compilation-->
   <Target Name="GenerateSources" BeforeTargets="BeforeBuild" Inputs="$(LogsShapeConfigFile);$(LogsShapeInputFile)" Outputs="$(LogsShapeOutputFile)">
-    <Exec Command="$(NSwagExe_Net80) run $(LogsShapeConfigFile) /variables:OutputFile=../$(LogsShapeOutputFile)" ConsoleToMSBuild="true" />
+    <Exec Command="$(NSwagExe_Net100) run $(LogsShapeConfigFile) /variables:OutputFile=../$(LogsShapeOutputFile)" ConsoleToMSBuild="true" />
   </Target>
   
   <!--Custom task to remove generated source code before clean project-->
