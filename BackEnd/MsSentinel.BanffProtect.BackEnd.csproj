@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <LogsShapeConfigFile>LogsUpload\nswag.json</LogsShapeConfigFile>
@@ -15,10 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Identity" Version="1.14.0" />
-    <PackageReference Include="Azure.Monitor.Ingestion" Version="1.1.2" />
-    <PackageReference Include="NSwag.AspNetCore" Version="14.4.0" />
-		<PackageReference Include="NSwag.MSBuild" Version="14.4.0">
+    <PackageReference Include="Azure.Identity" Version="1.17.0" />
+    <PackageReference Include="Azure.Monitor.Ingestion" Version="1.2.0" />
+    <PackageReference Include="NSwag.AspNetCore" Version="14.6.2" />
+		<PackageReference Include="NSwag.MSBuild" Version="14.6.2">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>

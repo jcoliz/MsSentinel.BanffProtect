@@ -12,8 +12,7 @@ To bring up this demo, you will first need:
 * [Azure CLI tool with Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/install#azure-cli)
 * A git client, e.g. [Git for Windows](https://gitforwindows.org/)
 * Execution policy configured to run unsigned PowerShell scripts, see [About Execution Policies](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies)
-* [.NET 8.0](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) or [.NET 9.0](https://dotnet.microsoft.com/en-us/download/dotnet/9.0) SDK
-* [.NET Aspire Workload](https://learn.microsoft.com/en-us/dotnet/aspire/fundamentals/setup-tooling?tabs=windows&pivots=vscode). Note that no container runtime is needed for this demo.
+* [.NET 10.0.100 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0). Note that for compatibility, this project is locked to 10.0.1xx of the SDK.
 
 Please refer to the [Tech Check Guide](./docs/Tech-Check.md) for step-by-step instructions to ensure you're ready to continue with the demo.
 
@@ -34,10 +33,10 @@ Clone this repo with submodules so you have the [AzDeploy.Bicep](https://github.
 
 ### 2. Log into Azure
 
-In a terminal window, ensure you are logged into Azure
+In a terminal window, ensure you are logged into Azure. First, check which tenant you intend to work in, and include the ID for that tenant in your login.
 
 ```dotnetcli
-az login
+az login --tenant <your_tenant_id>
 ```
 
 Then verify that the subscription you're logged into is where you want to deploy. Make adjustments as needed.
@@ -109,10 +108,20 @@ Connect the CCP Push data connector contained within this solution.
 "Banff Protect" is a fictional SaaS application which sends logs to Microsoft Sentinel in the same form as the real-life Jamf Protect solution expects them. We will run
 this application locally on our machine using .NET Aspire.
 
-1. Launch VS Code
-1. Choose "File" in the menu bar, and then "Open Folder..."
-1. Open the folder where you had previously cloned the repository
-1. Press [F5]. This will build, run, and open a browser tab showing the Aspire Dashboard for the project.
+1. Start in a terminal window running PowerShell
+1. Ensure the current working directory is the top level directory where you cloned the repository
+1. Build the solution first to ensure everything is set up correctly
+    ```pwsh
+    dotnet build
+    ```
+1. Run the Aspire application host
+    ```
+    dotnet watch --project AppHost
+    ```
+1. This should open a browser tab showing the Aspire Dashboard for the project. If not, look for a line like this in the output:
+    ```
+    <6>Aspire.Hosting.DistributedApplication[0] Login to the dashboard at https://localhost:12345/login?t=some_token
+    ```
 
 ## Navigate to the front end
 
